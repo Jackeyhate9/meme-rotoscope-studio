@@ -179,7 +179,7 @@ cp .env.example .env
 
 ### 1. 克隆代码仓库
 ```bash
-git clone https://github.com/your-username/meme-rotoscope-studio.git
+git clone https://github.com/Jackeyhate9/meme-rotoscope-studio.git
 cd meme-rotoscope-studio
 ```
 
