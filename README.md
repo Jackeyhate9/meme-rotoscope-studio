@@ -12,7 +12,7 @@
 *基于字节跳动 SEED 2.5 / 快手可灵 1.5 / MiniMax 海螺 / 本地工业级 Hypit FastVideo v2*  
 *Meta SAM 2 智能目标追踪 + PySceneDetect 镜头切分 + AG-UI 协议全双工协同 + Agent Reach 新媒体实时直通*
 
-[🖥️ C 端前台原型 (prototype.html)](prototype.html) • [🛡️ 运营中台 (admin.html)](admin.html) • [⚡ 一键启动脚本 (start_ui.bat)](start_ui.bat) • [📊 定价精算表 (.xlsx)](MemeMorph_算力与会员定价全景精算表.xlsx) • [💬 联系作者](#-作者简介与微信交流群-author--contact)
+[🖥️ C 端前台原型 (prototype.html)](prototype.html) • [🛡️ 运营中台 (admin.html)](admin.html) • [⚡ 一键启动脚本 (start_ui.bat)](start_ui.bat) • [💬 联系作者](#-作者简介与微信交流群-author--contact)
 
 </div>
 
@@ -24,13 +24,13 @@
 
 | 视图 | 预览图 | 核心亮点 |
 | :--- | :--- | :--- |
-| **Hero 探索大厅** | ![Hero](cover_hero.png) | 非对称 Bento 布局、全网实时出片广播跑马灯、一键分析入口、一键长视频模式切换 |
-| **B站/抖音热门信息流** | ![Explore Feed](cover_explore_feed.png) | Agent Reach 驱动实时检索 B站 & 抖音爆款 MV、分类过滤胶囊、二创人设智能推荐 |
-| **二创无限画布** | ![Studio Workbench](cover_studio_workbench.png) | UpDream 风格自由节点拓扑、保留分支探索不覆盖、流光贝塞尔连线 |
-| **经典双栏工作台** | ![Studio Classic](cover_studio_classic.png) | 影院级高对比黑底监视器、参数精调底座、一键长视频修改开关、角色基因芯片 |
-| **四维模型底座矩阵** | ![Engine Matrix](cover_engine_matrix.png) | 字节 SEED 2.5、可灵 1.5、MiniMax、本地 Hypit 引擎状态探测 |
-| **成品交付与生命周期** | ![Delivery](cover_delivery.png) | Split Wipe 划动成片对比、分镜素材下载、30 天到期一键替换淘汰 |
-| **算力与会员中心** | ![Pricing](cover_pricing.png) | 纯白三栏定价方案卡片、算力透明扣点机制、企业算力池接入 |
+| **Hero 探索大厅** | ![Hero](docs/assets/cover_hero.png) | 非对称 Bento 布局、全网实时出片广播跑马灯、一键分析入口、一键长视频模式切换 |
+| **B站/抖音热门信息流** | ![Explore Feed](docs/assets/cover_explore_feed.png) | Agent Reach 驱动实时检索 B站 & 抖音爆款 MV、分类过滤胶囊、二创人设智能推荐 |
+| **二创无限画布** | ![Studio Workbench](docs/assets/cover_studio_workbench.png) | UpDream 风格自由节点拓扑、保留分支探索不覆盖、流光贝塞尔连线 |
+| **经典双栏工作台** | ![Studio Classic](docs/assets/cover_studio_classic.png) | 影院级高对比黑底监视器、参数精调底座、一键长视频修改开关、角色基因芯片 |
+| **四维模型底座矩阵** | ![Engine Matrix](docs/assets/cover_engine_matrix.png) | 字节 SEED 2.5、可灵 1.5、MiniMax、本地 Hypit 引擎状态探测 |
+| **成品交付与生命周期** | ![Delivery](docs/assets/cover_delivery.png) | Split Wipe 划动成片对比、分镜素材下载、30 天到期一键替换淘汰 |
+| **算力与会员中心** | ![Pricing](docs/assets/cover_pricing.png) | 纯白三栏定价方案卡片、算力透明扣点机制、企业算力池接入 |
 
 ---
 
