@@ -1,0 +1,145 @@
+[
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1795278548",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1795278501",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1795274582",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1795274144",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1794811688",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1794811226",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1794799594",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1794767912",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "name": "东北药匣子",
+    "tag": "药匣子",
+    "universe": "自定义用户角色",
+    "prompt": "药膳大师手拿药葫芦",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "badge": "用户上传",
+    "id": "char_custom_1794767200",
+    "calls_count": 0,
+    "is_active": true
+  },
+  {
+    "id": "char_fdb",
+    "name": "范德彪",
+    "tag": "彪哥",
+    "universe": "辽北第一狠人宇宙",
+    "prompt": "反差开原风：范德彪身穿维多利亚经典西装，黑色大墨镜，霸气歪嘴神态跳 K-Pop 卡点女团舞，保留招牌鹰爪挠手势。",
+    "avatar_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=200&auto=format&fit=crop",
+    "calls_count": 12420,
+    "is_active": true,
+    "badge": "最热推荐"
+  },
+  {
+    "id": "char_zbs",
+    "name": "赵本山",
+    "tag": "大叔",
+    "universe": "白云黑土小品宇宙",
+    "prompt": "复古开原风：身穿经典蓝色中山棉袄，头戴雷锋羊毛帽，质朴喜感表情，配合太空步与三道弯机械动作严格卡点。",
+    "avatar_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=200&auto=format&fit=crop",
+    "calls_count": 8930,
+    "is_active": true,
+    "badge": "经典反差"
+  },
+  {
+    "id": "char_lyl",
+    "name": "李云龙",
+    "tag": "老李",
+    "universe": "亮剑正剧反差",
+    "prompt": "亮剑反差风：粗布八路军军装，铁血硬汉气质与粗犷霸道目光，跳深情双人爵士舞，神情反差萌爆笑拉满。",
+    "avatar_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=200&auto=format&fit=crop",
+    "calls_count": 6120,
+    "is_active": true,
+    "badge": "鬼畜顶流"
+  },
+  {
+    "id": "char_cbh",
+    "name": "赛博大花袄",
+    "tag": "大花",
+    "universe": "国潮概念皮肤",
+    "prompt": "赛博国潮风：东北大红大绿艳丽棉花袄高保真纹理，融入赛博朋克面部机械发光纹路，舞台伴随霓虹灯光效律动。",
+    "avatar_url": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=200&auto=format&fit=crop",
+    "calls_count": 4350,
+    "is_active": true,
+    "badge": "视觉冲击"
+  }
+]

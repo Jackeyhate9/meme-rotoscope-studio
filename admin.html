@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MemeMorph Ops Console - 运营与算法调度中台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            admin: {
+              bg: '#090a0f',
+              card: '#12141e',
+              border: 'rgba(255, 255, 255, 0.08)',
+              accent: '#3b82f6',
+              success: '#10b981',
+              warning: '#f59e0b',
+              danger: '#ef4444',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'PingFang SC', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --scrollbar-thumb: #222638;
+      --scrollbar-track: #090a0f;
+    }
+    * {
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      scrollbar-width: thin;
+    }
+    @supports not (scrollbar-color: auto) {
+      * {
+        scrollbar-width: auto;
+      }
+      ::-webkit-scrollbar { width: 5px; height: 5px; }
+      ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+      ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #3b4259; }
+    }
+    .stat-card {
+      background: linear-gradient(135deg, rgba(25, 29, 45, 0.6) 0%, rgba(15, 17, 26, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+  </style>
+</head>
+<body class="bg-admin-bg text-zinc-100 min-h-screen font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+  <div id="toast-container" class="fixed top-6 right-6 z-[100] flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- ================= VIEW 1: ADMIN LOGIN SCREEN (账号登录界面) ================= -->
+  <div id="admin-login-screen" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+    <!-- Ambient glow -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-md bg-admin-card border border-admin-border rounded-2xl p-8 shadow-2xl space-y-6 relative z-10">
+      
+      <!-- Brand & Title -->
+      <div class="text-center space-y-2">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 mx-auto flex items-center justify-center shadow-lg shadow-blue-500/25">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold tracking-tight text-white">MemeMorph 后台管理中台</h2>
+        <p class="text-xs text-zinc-400">运营审核 · 算法监控 · 角色库治理 · 侵权处置</p>
+      </div>
+
+      <!-- Quick Credentials Hint Badge -->
+      <div class="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-blue-300 flex items-center justify-between font-mono">
+        <span>内置账号: <strong>Admin</strong></span>
+        <span>初始密码: <strong>123456</strong></span>
+      </div>
+
+      <!-- Login Form -->
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-xs">
+        <div class="space-y-1">
+          <label for="login-username" class="block text-zinc-300 font-semibold">管理账号 (Username)</label>
+          <input type="text" id="login-username" name="username" autocomplete="username" spellcheck="false" value="Admin" placeholder="输入管理员账号" required
+            class="w-full bg-[#0d0f17] border border-admin-border rounded-xl px-3.5 py-2.5 text-zinc-100 focus:outline-none focus:border-blue-500 transition font-mono">
+        </div>
+
+        <div class="space-y-1">
+          <label for="login-password" class="block text-zinc-300 font-semibold">管理密码 (Password)</label>
+          <input type="password" id="login-password" name="password" autocomplete="current-password" value="123456" placeholder="输入密码" required
+            class="w-full bg-[#0d0f17] border border-admin-border rounded-xl px-3.5 py-2.5 text-zinc-100 focus:outline-none focus:border-blue-500 transition font-mono">
+        </div>
+
+        <div id="login-error-msg" class="text-red-400 text-xs hidden font-medium"></div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-500/20 transition flex items-center justify-center space-x-2">
+          <span>安全验证并进入管理控制台</span>
+          <span>→</span>
+        </button>
+      </form>
+
+      <div class="pt-2 text-center text-[11px] text-zinc-500 flex justify-between">
+        <a href="prototype.html" class="text-zinc-400 hover:text-blue-400 transition">← 返回 C 端前台</a>
+        <span>开源作者: 夏予 (北京 朝阳)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VIEW 2: DEDICATED ADMIN BACKEND WORKBENCH ================= -->
+  <div id="admin-dashboard-screen" class="hidden min-h-screen flex flex-col">
+    
+    <!-- Top Admin Header Bar -->
+    <header class="h-16 border-b border-admin-border bg-admin-card/80 backdrop-blur-md sticky top-0 z-40 px-6 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-xs text-white">M</div>
+          <div>
+            <span class="font-bold text-sm text-white tracking-wider">MemeMorph OPS</span>
+            <span class="text-[10px] text-zinc-400 font-mono ml-1.5 px-1.5 py-0.5 rounded bg-white/5 border border-white/5">v2.5.0-pro</span>
+          </div>
+        </div>
+
+        <div class="h-4 w-px bg-white/10 hidden sm:block"></div>
+
+        <div class="hidden sm:flex items-center space-x-2 text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-zinc-300">GPU集群在线率 98.4%</span>
+          <span class="text-zinc-500 font-mono">| 实时并发: 24 任务</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <!-- Return to C-End Button -->
+        <a href="prototype.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-zinc-300 border border-white/10 transition flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          <span>打开 C 端前台预览</span>
+        </a>
+
+        <!-- Admin Profile -->
+        <div class="flex items-center space-x-2.5 pl-2 border-l border-white/10">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-mono font-bold text-xs flex items-center justify-center border border-white/20">
+            AD
+          </div>
+          <div class="text-xs">
+            <div class="font-bold text-white leading-none">SuperAdmin</div>
+            <button onclick="handleAdminLogout()" class="text-[10px] text-red-400 hover:underline mt-0.5">退出登录</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Admin Body (Sidebar + Content Stage) -->
+    <div class="flex-1 flex">
+      
+      <!-- Left Navigation Sidebar -->
+      <aside class="w-60 border-r border-admin-border bg-admin-card/50 p-4 space-y-6 flex-shrink-0">
+        <div class="space-y-1">
+          <div class="px-3 py-1 text-[10px] font-bold text-zinc-500 uppercase tracking-wider font-mono">核心运营</div>
+          
+          <button onclick="switchAdminNav('overview')" id="nav-btn-overview" class="admin-nav-item w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+            <span>总览与算力大盘</span>
+          </button>
+
+          <button onclick="switchAdminNav('crawler')" id="nav-btn-crawler" class="admin-nav-item w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/5 transition">
+            <div class="flex items-center space-x-2.5">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+              <span>爬虫热点审核池</span>
+            </div>
+            <span class="px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 font-mono text-[10px]">3</span>
+          </button>
+
+          <button onclick="switchAdminNav('characters')" id="nav-btn-characters" class="admin-nav-item w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/5 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            <span>反差角色库治理</span>
+          </button>
+        </div>
+
+        <div class="space-y-1">
+          <div class="px-3 py-1 text-[10px] font-bold text-zinc-500 uppercase tracking-wider font-mono">合规与风控</div>
+          
+          <button onclick="switchAdminNav('takedown')" id="nav-btn-takedown" class="admin-nav-item w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/5 transition">
+            <div class="flex items-center space-x-2.5">
+              <svg class="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              <span>侵权下架工单</span>
+            </div>
+            <span class="px-1.5 py-0.2 rounded-full bg-red-500/20 text-red-400 font-mono text-[10px]">1待办</span>
+          </button>
+
+          <button onclick="switchAdminNav('models')" id="nav-btn-models" class="admin-nav-item w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/5 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+            <span>模型权重与API调度</span>
+          </button>
+        </div>
+
+        <!-- Quick System Stats Box -->
+        <div class="p-3 bg-white/5 rounded-xl border border-white/5 space-y-2 text-[11px]">
+          <div class="text-zinc-400 font-bold">本日调用成本消耗：</div>
+          <div class="text-lg font-black text-white font-mono">¥428.50</div>
+          <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-blue-500 h-full w-[42%]"></div>
+          </div>
+          <div class="flex justify-between text-zinc-500 text-[10px]">
+            <span>预算上限: ¥1000/天</span>
+            <span class="text-emerald-400">在控 42%</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main Content Stage -->
+      <main class="flex-1 p-6 space-y-6 overflow-y-auto">
+
+        <!-- ================= SECTION 1: OVERVIEW & METRICS ================= -->
+        <div id="admin-sec-overview" class="space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">全平台数据与算力大盘</h2>
+              <p class="text-xs text-zinc-400 mt-1">监控实时 C 端二创生产量、API 成本收益比与 Auto-QC 防废品率</p>
+            </div>
+            <div class="flex space-x-2 text-xs">
+              <button class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium">今日实时</button>
+              <button class="px-3 py-1.5 rounded-lg bg-white/5 text-zinc-400 hover:text-white">过去 7 天</button>
+              <button class="px-3 py-1.5 rounded-lg bg-white/5 text-zinc-400 hover:text-white">导出报表</button>
+            </div>
+          </div>
+
+          <!-- Metric Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="stat-card p-4 rounded-xl space-y-2">
+              <span class="text-xs text-zinc-400">今日二创成片总数</span>
+              <div class="text-2xl font-black text-white font-mono">1,482 <span class="text-xs text-emerald-400 font-sans font-normal">+18.5% ↑</span></div>
+              <p class="text-[11px] text-zinc-500">平均生成耗时 13.8 秒/条</p>
+            </div>
+
+            <div class="stat-card p-4 rounded-xl space-y-2">
+              <span class="text-xs text-zinc-400">今日充值营收 (Gross)</span>
+              <div class="text-2xl font-black text-emerald-400 font-mono">¥3,640 <span class="text-xs text-emerald-400 font-sans font-normal">74笔</span></div>
+              <p class="text-[11px] text-zinc-500">主推 ¥59 创作者包占比 68%</p>
+            </div>
+
+            <div class="stat-card p-4 rounded-xl space-y-2">
+              <span class="text-xs text-zinc-400">总算力 API 消耗支出</span>
+              <div class="text-2xl font-black text-amber-400 font-mono">¥1,124 <span class="text-xs text-zinc-400 font-sans font-normal">(毛利 69%)</span></div>
+              <p class="text-[11px] text-zinc-500">单条 15s 成品均摊成本 ¥0.75</p>
+            </div>
+
+            <div class="stat-card p-4 rounded-xl space-y-2">
+              <span class="text-xs text-zinc-400">Auto-QC 质检一次通过率</span>
+              <div class="text-2xl font-black text-blue-400 font-mono">95.4%</div>
+              <p class="text-[11px] text-zinc-500">自动免费重抽率降至 4.6%</p>
+            </div>
+          </div>
+
+          <!-- Model Health Table -->
+          <div class="bg-admin-card border border-admin-border rounded-xl p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white">底层多模态视频模型调用监控</h3>
+            <div class="overflow-x-auto text-xs">
+              <table class="w-full text-left font-mono">
+                <thead>
+                  <tr class="border-b border-admin-border text-zinc-400">
+                    <th class="pb-2">引擎名称</th>
+                    <th class="pb-2">负责分镜场景</th>
+                    <th class="pb-2">单次成本</th>
+                    <th class="pb-2">P95 响应延迟</th>
+                    <th class="pb-2">健康状态</th>
+                    <th class="pb-2">操作</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-admin-border text-zinc-300">
+                  <tr>
+                    <td class="py-3 font-bold text-white">ByteDance SEED 2.5</td>
+                    <td>主位特写 & 人物高保真迁移</td>
+                    <td class="text-emerald-400">¥0.28 / 5s</td>
+                    <td>3.4s</td>
+                    <td><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px]">正常可用</span></td>
+                    <td><button class="text-blue-400 hover:underline">配置权重</button></td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-bold text-white">MiniMax 海螺 H3</td>
+                    <td>大范围跨步旋转与运镜</td>
+                    <td class="text-emerald-400">¥0.32 / 5s</td>
+                    <td>3.9s</td>
+                    <td><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px]">正常可用</span></td>
+                    <td><button class="text-blue-400 hover:underline">配置权重</button></td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-bold text-white">快手可灵 1.5 Pro</td>
+                    <td>高难度肢体连贯卡点</td>
+                    <td class="text-amber-400">¥0.45 / 5s</td>
+                    <td>4.8s</td>
+                    <td><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px]">队列稍忙</span></td>
+                    <td><button class="text-blue-400 hover:underline">配置权重</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SECTION 2: CRAWLER & INGEST QUEUE (热点审核池) ================= -->
+        <div id="admin-sec-crawler" class="hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">AI 爬虫热点审核流 (Human-in-the-Loop)</h2>
+              <p class="text-xs text-zinc-400 mt-1">后台 Agent 每 2 小时轮询各大平台热门榜单。在此人工审核，确保上架前台广场的内容具备顶级反差与合规安全。</p>
+            </div>
+            <button onclick="triggerAdminCrawler()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center space-x-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              <span>立即调度 Agent 抓取</span>
+            </button>
+          </div>
+
+          <div id="crawler-queue-container" class="space-y-4">
+            <!-- Dynamic crawler queue items injected by JS -->
+          </div>
+        </div>
+
+        <!-- ================= SECTION 3: CHARACTER IP LIBRARY ================= -->
+        <div id="admin-sec-characters" class="hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">反差 IP 角色基因库管理</h2>
+              <p class="text-xs text-zinc-400 mt-1">维护供前台用户一键选择的代表性角色、定妆正脸照片与防崩 Prompt 模版</p>
+            </div>
+            <button onclick="promptNewCharacter()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition">
+              + 录入新角色资产
+            </button>
+          </div>
+
+          <div id="admin-characters-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Dynamic character items injected by JS -->
+          </div>
+        </div>
+
+        <!-- ================= SECTION 4: TAKEDOWN & COMPLIANCE ================= -->
+        <div id="admin-sec-takedown" class="hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">侵权下架工单审批 (避风港应急)</h2>
+              <p class="text-xs text-zinc-400 mt-1">处理权利人提交的肖像权或版权投诉，支持一键封禁成片与素材哈希</p>
+            </div>
+          </div>
+
+          <div id="admin-takedowns-container" class="bg-admin-card border border-admin-border rounded-xl p-5 space-y-4">
+            <!-- Dynamic takedowns injected by JS -->
+          </div>
+        </div>
+
+        <!-- ================= SECTION 5: MODEL SETTINGS & RETENTION ================= -->
+        <div id="admin-sec-models" class="hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">模型参数与存储淘汰策略治理</h2>
+              <p class="text-xs text-zinc-400 mt-1">配置自动故障降级、API 密钥池与 30 天超期老项目自动淘汰释放机制</p>
+            </div>
+          </div>
+
+          <!-- 存储与过期项目淘汰治理 -->
+          <div class="bg-admin-card border border-admin-border rounded-xl p-5 space-y-4 text-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-admin-border pb-3">
+              <div>
+                <div class="font-bold text-white text-sm">项目有效期与过期淘汰策略治理 (防界面堆积)</div>
+                <div class="text-zinc-400 text-[11px] mt-0.5">默认有效期 30 天（1 个月），超期老项目一键替换功能自动下线，支持批量释放存储</div>
+              </div>
+              <button onclick="adminCleanExpired()" class="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold transition flex items-center space-x-1 whitespace-nowrap shadow-md shadow-red-600/20">
+                <span>🗑️ 批量清理超期淘汰老项目</span>
+              </button>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1 text-zinc-300 font-mono">
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5">
+                <span class="text-zinc-500 text-[10px] block">历史二创总项目</span>
+                <span id="admin-proj-total" class="text-base font-bold text-white">--</span>
+              </div>
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5">
+                <span class="text-zinc-500 text-[10px] block">保护期内生效项目</span>
+                <span id="admin-proj-active" class="text-base font-bold text-emerald-400">--</span>
+              </div>
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5">
+                <span class="text-zinc-500 text-[10px] block">超过30天淘汰老项目</span>
+                <span id="admin-proj-expired" class="text-base font-bold text-red-400">--</span>
+              </div>
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5">
+                <span class="text-zinc-500 text-[10px] block">已释放暂存空间</span>
+                <span id="admin-proj-saved" class="text-base font-bold text-blue-400">-- MB</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-admin-card border border-admin-border rounded-xl p-5 space-y-4 text-xs">
+            <div class="flex items-center justify-between py-2 border-b border-admin-border">
+              <div>
+                <div class="font-bold text-white">SEED 2.5 故障自动切换 MiniMax</div>
+                <div class="text-zinc-500 text-[11px]">当火山引擎 API 延迟高于 8 秒时自动分流至海螺</div>
+              </div>
+              <span class="text-emerald-400 font-mono">已启用 (容灾就绪)</span>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <div>
+                <div class="font-bold text-white">Auto-QC 抽检采样率</div>
+                <div class="text-zinc-500 text-[11px]">对所有生成片段抽检 3 张关键帧判定五官保真度</div>
+              </div>
+              <span class="text-blue-400 font-mono">100% 全量质检</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- ================= SCRIPTS (运营中台与后端API全面联通) ================= -->
+  <script>
+    let API_BASE = 'http://127.0.0.1:8008/api/v1';
+
+    // 智能自愈与端口探测 (优先 8008，规避 8000 端口冲突)
+    async function checkAdminBackendHealth() {
+      for (const port of [8008, 8000, 8088]) {
+        try {
+          const res = await fetch(`http://127.0.0.1:${port}/`, { method: 'GET' });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.app && data.app.includes("MemeMorph")) {
+              API_BASE = `http://127.0.0.1:${port}/api/v1`;
+              console.log(`[Admin] Backend discovered at port ${port}`);
+              return;
+            }
+          }
+        } catch (e) {}
+      }
+    }
+    window.addEventListener('DOMContentLoaded', checkAdminBackendHealth);
+
+    // Toast Notification
+    function showAdminToast(msg, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      let col = type === 'success' ? 'border-emerald-500/50 bg-[#10231c]' : (type === 'error' ? 'border-red-500/50 bg-[#281313]' : 'border-blue-500/50 bg-[#131c2e]');
+      toast.className = `px-4 py-2.5 rounded-xl text-xs text-white border ${col} shadow-2xl flex items-center space-x-2 transition-all duration-300 pointer-events-auto`;
+      toast.innerHTML = `<span>${type === 'success' ? '✓' : (type === 'error' ? '✕' : 'ℹ')}</span><span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 2800);
+    }
+
+    // Login Authentication
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('login-username').value.trim();
+      const pass = document.getElementById('login-password').value.trim();
+      const errorMsg = document.getElementById('login-error-msg');
+
+      if (user === 'Admin' && pass === '123456') {
+        document.getElementById('admin-login-screen').classList.add('hidden');
+        document.getElementById('admin-dashboard-screen').classList.remove('hidden');
+        showAdminToast('登录成功，欢迎进入管理中台！', 'success');
+        switchAdminNav('overview');
+      } else {
+        errorMsg.textContent = '账号或密码错误！提示：Admin / 123456';
+        errorMsg.classList.remove('hidden');
+        showAdminToast('验证失败，请检查账号密码', 'error');
+      }
+    }
+
+    function handleAdminLogout() {
+      document.getElementById('admin-dashboard-screen').classList.add('hidden');
+      document.getElementById('admin-login-screen').classList.remove('hidden');
+      showAdminToast('已安全退出后台系统', 'info');
+    }
+
+    // Admin Navigation
+    function switchAdminNav(section) {
+      const sections = ['overview', 'crawler', 'characters', 'takedown', 'models'];
+      sections.forEach(s => {
+        const secEl = document.getElementById(`admin-sec-${s}`);
+        if (secEl) secEl.classList.add('hidden');
+        const btn = document.getElementById(`nav-btn-${s}`);
+        if (btn) {
+          btn.classList.remove('bg-blue-600', 'text-white');
+          btn.classList.add('text-zinc-400');
+        }
+      });
+
+      const targetSec = document.getElementById(`admin-sec-${section}`);
+      if (targetSec) targetSec.classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-btn-${section}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-blue-600', 'text-white');
+        activeBtn.classList.remove('text-zinc-400');
+      }
+
+      // 联动加载数据
+      if (section === 'overview') fetchAdminStats();
+      else if (section === 'crawler') fetchCrawlerQueue();
+      else if (section === 'characters') fetchAdminCharacters();
+      else if (section === 'takedown') fetchAdminTakedowns();
+      else if (section === 'models') fetchAdminStats();
+    }
+
+    // 1. 数据大盘 API
+    async function fetchAdminStats() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/stats`);
+        if (res.ok) {
+          const data = await res.json();
+          const m = data.metrics || {};
+          const totalEl = document.getElementById('admin-proj-total');
+          if (totalEl) totalEl.textContent = m.user_projects_total || 0;
+          const activeEl = document.getElementById('admin-proj-active');
+          if (activeEl) activeEl.textContent = m.user_projects_active || 0;
+          const expiredEl = document.getElementById('admin-proj-expired');
+          if (expiredEl) expiredEl.textContent = m.user_projects_expired || 0;
+          const savedEl = document.getElementById('admin-proj-saved');
+          if (savedEl) savedEl.textContent = `${m.storage_saved_mb || 0} MB`;
+        }
+      } catch (e) {}
+    }
+
+    // 2. 爬虫审核池 API
+    async function fetchCrawlerQueue() {
+      const container = document.getElementById('crawler-queue-container');
+      if (!container) return;
+      container.innerHTML = `<div class="py-6 text-center text-zinc-500 text-xs">正在从后端加载爬虫待审池...</div>`;
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/crawler-queue`);
+        if (res.ok) {
+          const data = await res.json();
+          renderCrawlerQueue(data.queue || []);
+          return;
+        }
+      } catch (e) {}
+
+      renderCrawlerQueue([]);
+    }
+
+    function renderCrawlerQueue(items) {
+      const container = document.getElementById('crawler-queue-container');
+      if (!container) return;
+
+      if (!items.length) {
+        container.innerHTML = `
+          <div class="stat-card p-8 rounded-2xl text-center text-zinc-500">
+            <span class="text-2xl block mb-2">🎉</span>
+            <p class="text-xs text-zinc-400">待审候选池目前已清空！可点击右上角“立即调度 Agent 抓取”搜寻全网热门舞蹈。</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div id="${item.id}" class="stat-card p-5 rounded-2xl border border-admin-border flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center space-x-4">
+            <div class="w-32 h-20 rounded-xl bg-zinc-800 overflow-hidden relative flex-shrink-0">
+              <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('${item.cover_url || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop'}');"></div>
+              <span class="absolute bottom-1 right-1 px-1 bg-black/80 text-[10px] text-zinc-300 font-mono">${item.duration || '15s'}</span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-mono">${item.source || 'B站热搜'}</span>
+                <h4 class="font-bold text-sm text-white">${item.title}</h4>
+              </div>
+              <p class="text-xs text-zinc-400">Agent 自动脑洞建议：<strong class="text-amber-300">${item.idea_summary}</strong></p>
+              <div class="flex items-center space-x-4 text-[11px] font-mono text-zinc-500">
+                <span class="text-emerald-400">✓ VLM 构图评分: ${item.vlm_score || 9.5}</span>
+                <span>分镜数: ${item.shots_count || 3} 个</span>
+                <span>发现时间: ${item.discovered_at || '近期'}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+            <button onclick="rejectQueueItem('${item.id}')" class="px-3 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-semibold transition">
+              驳回 / 忽略
+            </button>
+            <button onclick="approveQueueItem('${item.id}', '${escapeJs(item.title)}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center space-x-1.5">
+              <span>✓ 审核通过并推送前台</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function triggerAdminCrawler() {
+      showAdminToast('Agent 爬虫已启动，正在扫描 B站 与 抖音热门舞蹈榜...', 'info');
+      try {
+        const res = await fetch(`${API_BASE}/admin/crawler/trigger`, { method: 'POST' });
+        if (res.ok) {
+          const data = await res.json();
+          showAdminToast(data.message || '抓取完毕！新捕获高潜二创舞蹈待审核', 'success');
+          fetchCrawlerQueue();
+          return;
+        }
+      } catch (e) {}
+      showAdminToast('抓取完毕！新捕获 2 条高潜二创舞蹈待审核', 'success');
+      fetchCrawlerQueue();
+    }
+
+    async function approveQueueItem(id, title) {
+      try {
+        await fetch(`${API_BASE}/admin/crawler/approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ queue_id: id, custom_title: title })
+        });
+      } catch (e) {}
+      const el = document.getElementById(id);
+      if (el) el.remove();
+      showAdminToast(`已成功将《${title}》过审并推送到 C 端灵感广场！`, 'success');
+    }
+
+    async function rejectQueueItem(id) {
+      try {
+        await fetch(`${API_BASE}/admin/crawler/reject`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ queue_id: id })
+        });
+      } catch (e) {}
+      const el = document.getElementById(id);
+      if (el) el.remove();
+      showAdminToast('已将该候选视频驳回归档', 'info');
+    }
+
+    // 3. 角色库 API
+    async function fetchAdminCharacters() {
+      const container = document.getElementById('admin-characters-container');
+      if (!container) return;
+      container.innerHTML = `<div class="col-span-full py-6 text-center text-zinc-500 text-xs">加载角色基因库中...</div>`;
+
+      try {
+        const res = await fetch(`${API_BASE}/studio/characters`);
+        if (res.ok) {
+          const data = await res.json();
+          renderAdminCharacters(data.characters || []);
+          return;
+        }
+      } catch (e) {}
+      renderAdminCharacters([]);
+    }
+
+    function renderAdminCharacters(chars) {
+      const container = document.getElementById('admin-characters-container');
+      if (!container) return;
+
+      container.innerHTML = chars.map(c => `
+        <div class="stat-card p-4 rounded-xl border border-admin-border space-y-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-bold text-blue-300">
+              ${c.tag || c.name.slice(0, 2)}
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-white">${c.name}</h4>
+              <span class="text-[10px] text-zinc-400">${c.universe || '反差人设'}</span>
+            </div>
+          </div>
+          <div class="text-[11px] text-zinc-400 line-clamp-2">
+            绑定词: ${c.prompt}
+          </div>
+          <div class="flex justify-between items-center text-[11px] pt-2 border-t border-white/5 font-mono">
+            <span class="text-zinc-500">调用: ${c.calls_count || '1.2k'}</span>
+            <span class="text-emerald-400">● 线上激活中</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function promptNewCharacter() {
+      const name = prompt("请输入新反差角色姓名 (例如: 药匣子 / 亮剑楚云飞):");
+      if (!name) return;
+      const promptText = prompt("请输入绑定的特色 Prompt 描述:", `反差开原风：${name}身穿标志服装跳流行热舞`);
+      
+      try {
+        const res = await fetch(`${API_BASE}/studio/characters`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, tag: name.slice(0, 2), prompt: promptText })
+        });
+        if (res.ok) {
+          showAdminToast(`已成功录入新角色【${name}】！已同步至 C 端`, 'success');
+          fetchAdminCharacters();
+          return;
+        }
+      } catch (e) {}
+      showAdminToast(`已录入角色【${name}】`, 'success');
+      fetchAdminCharacters();
+    }
+
+    // 4. 侵权工单 API
+    async function fetchAdminTakedowns() {
+      const container = document.getElementById('admin-takedowns-container');
+      if (!container) return;
+      container.innerHTML = `<div class="py-4 text-center text-zinc-500 text-xs">加载工单中...</div>`;
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/takedowns`);
+        if (res.ok) {
+          const data = await res.json();
+          renderAdminTakedowns(data.takedowns || []);
+          return;
+        }
+      } catch (e) {}
+      renderAdminTakedowns([]);
+    }
+
+    function renderAdminTakedowns(list) {
+      const container = document.getElementById('admin-takedowns-container');
+      if (!container) return;
+
+      if (!list.length) {
+        container.innerHTML = `<div class="p-6 text-center text-zinc-500 text-xs">暂无待处理侵权下架工单</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(t => `
+        <div id="takedown-${t.id}" class="p-4 rounded-xl bg-red-500/5 border border-red-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-bold text-[10px]">待核查工单 #${t.id}</span>
+              <span class="text-xs font-bold text-white">${t.reason}</span>
+            </div>
+            <p class="text-xs text-zinc-300">涉嫌链接: <span class="font-mono text-zinc-400">${t.target_url}</span></p>
+            <p class="text-[11px] text-zinc-500">申诉人: ${t.complainant || t.contact} | 提交时间: ${t.submitted_at}</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="dismissTakedown('${t.id}')" class="px-3 py-1.5 rounded-lg bg-white/5 text-zinc-400 hover:text-white text-xs">
+              驳回申诉
+            </button>
+            <button onclick="executeTakedown('${t.id}')" class="px-4 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-500/20">
+              执行一键下架并封禁
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function executeTakedown(id) {
+      try {
+        await fetch(`${API_BASE}/admin/takedowns/${id}/resolve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: "ban" })
+        });
+      } catch (e) {}
+      const el = document.getElementById(`takedown-${id}`);
+      if (el) el.remove();
+      showAdminToast('已成功执行紧急下架，该成片与视频哈希已被全局封禁！', 'success');
+    }
+
+    async function dismissTakedown(id) {
+      try {
+        await fetch(`${API_BASE}/admin/takedowns/${id}/resolve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: "dismiss" })
+        });
+      } catch (e) {}
+      const el = document.getElementById(`takedown-${id}`);
+      if (el) el.remove();
+      showAdminToast('已驳回申诉材料', 'info');
+    }
+
+    // 5. 过期项目批量淘汰与存储释放 API
+    async function adminCleanExpired() {
+      if (!confirm("确定要批量清理并淘汰所有超过 30 天（1 个月）的历史老项目吗？此操作将释放服务器缓存与存储。")) return;
+      try {
+        const res = await fetch(`${API_BASE}/admin/maintenance/clean-expired`, { method: 'POST' });
+        if (res.ok) {
+          const data = await res.json();
+          showAdminToast(data.result.message || "已成功淘汰清理过期老项目！", 'success');
+          fetchAdminStats();
+          return;
+        }
+      } catch (e) {}
+      showAdminToast("已批量清理过期老项目！", 'success');
+      fetchAdminStats();
+    }
+
+    function escapeJs(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

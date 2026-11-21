@@ -1,0 +1,242 @@
+{
+  "version": "2.5.0",
+  "canvas_mode": "infinite",
+  "pan": {
+    "x": 100,
+    "y": 80
+  },
+  "zoom": 0.95,
+  "nodes": [
+    {
+      "id": "node-video-input",
+      "type": "video_input",
+      "title": "📹 原视频输入节点",
+      "x": 60,
+      "y": 80,
+      "width": 320,
+      "data": {
+        "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+        "title": "【4K60帧】2026 KGMA女团舞台高潮合集",
+        "duration": "14.8s",
+        "source": "B站热搜 No.1",
+        "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop"
+      }
+    },
+    {
+      "id": "node-scene-detect",
+      "type": "scene_detect",
+      "title": "✂️ PySceneDetect 分镜时序",
+      "x": 440,
+      "y": 80,
+      "width": 310,
+      "data": {
+        "shots_count": 3,
+        "shots": [
+          {
+            "name": "分镜 #01 (特写 0-4s)",
+            "type": "面部歪嘴表情置换",
+            "score": 9.4
+          },
+          {
+            "name": "分镜 #02 (全身 4-9s)",
+            "type": "肢体鹰爪挠舞步保持",
+            "score": 9.2
+          },
+          {
+            "name": "分镜 #03 (舞台 9-15s)",
+            "type": "霓虹灯维多利亚舞台",
+            "score": 9.6
+          }
+        ]
+      }
+    },
+    {
+      "id": "node-char-branch-1",
+      "type": "character",
+      "title": "🎭 角色基因卡: 范德彪 (主线)",
+      "x": 440,
+      "y": 420,
+      "width": 310,
+      "data": {
+        "character": "范德彪",
+        "nickname": "辽北第一狠人",
+        "avatar_badge": "彪哥",
+        "style_tag": "维多利亚西装",
+        "fidelity": "98.4% 骨骼锁定"
+      }
+    },
+    {
+      "id": "node-prompt-brain",
+      "type": "prompt_brain",
+      "title": "💡 AI 创意大脑提示词",
+      "x": 820,
+      "y": 180,
+      "width": 320,
+      "data": {
+        "formula": "帅气女团原舞 × 彪哥乡土反差 = 泼天流量",
+        "prompt": "反差开原风：范德彪身穿维多利亚西装，神情霸气跳 K-Pop 卡点女团舞，保留经典鹰爪挠手势",
+        "agent_idea": "方案 A: 辽北第一狠人女团打歌"
+      }
+    },
+    {
+      "id": "node-engine-renderer",
+      "type": "engine_renderer",
+      "title": "⚙️ 引擎调度与 Auto-QC 质检",
+      "x": 1200,
+      "y": 140,
+      "width": 300,
+      "data": {
+        "engine": "SEED 2.5",
+        "auto_qc": true,
+        "cost": 45,
+        "status": "就绪",
+        "est_time": "14.2s"
+      }
+    },
+    {
+      "id": "node-output-delivery",
+      "type": "output_delivery",
+      "title": "🎬 成片交付与双视窗直出",
+      "x": 1560,
+      "y": 80,
+      "width": 360,
+      "data": {
+        "title": "《范德彪·维多利亚打歌卡点舞》",
+        "qc_score": 9.4,
+        "status": "已就绪 / 可一键替换",
+        "preview_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop"
+      }
+    },
+    {
+      "id": "node-branch-5c5926",
+      "type": "character",
+      "title": "🎭 派生分支: 赵本山",
+      "x": 440,
+      "y": 680,
+      "width": 310,
+      "data": {
+        "character": "赵本山",
+        "nickname": "UpDream 并列分支",
+        "avatar_badge": "赵本",
+        "style_tag": "MiniMax 海螺 H3",
+        "fidelity": "99.0% 骨骼对齐"
+      }
+    },
+    {
+      "id": "node-deliv-37b862",
+      "type": "output_delivery",
+      "title": "🎬 分支成片: 赵本山 · 探索直出",
+      "x": 1560,
+      "y": 620,
+      "width": 360,
+      "data": {
+        "title": "《赵本山·分支对照实验成片》",
+        "qc_score": 9.7,
+        "status": "已就绪 / 对照中",
+        "preview_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=600&auto=format&fit=crop"
+      }
+    },
+    {
+      "id": "node-branch-989d81",
+      "type": "character",
+      "title": "🎭 派生分支: 赵本山",
+      "x": 440,
+      "y": 940,
+      "width": 310,
+      "data": {
+        "character": "赵本山",
+        "nickname": "UpDream 并列分支",
+        "avatar_badge": "赵本",
+        "style_tag": "MiniMax 海螺 H3",
+        "fidelity": "99.0% 骨骼对齐"
+      }
+    },
+    {
+      "id": "node-deliv-61bfe6",
+      "type": "output_delivery",
+      "title": "🎬 分支成片: 赵本山 · 探索直出",
+      "x": 1560,
+      "y": 880,
+      "width": 360,
+      "data": {
+        "title": "《赵本山·分支对照实验成片》",
+        "qc_score": 9.7,
+        "status": "已就绪 / 对照中",
+        "preview_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=600&auto=format&fit=crop"
+      }
+    }
+  ],
+  "links": [
+    {
+      "from": "node-video-input",
+      "to": "node-scene-detect",
+      "label": "15s 视频流"
+    },
+    {
+      "from": "node-scene-detect",
+      "to": "node-prompt-brain",
+      "label": "3段切点特征"
+    },
+    {
+      "from": "node-char-branch-1",
+      "to": "node-prompt-brain",
+      "label": "角色面部基因"
+    },
+    {
+      "from": "node-prompt-brain",
+      "to": "node-engine-renderer",
+      "label": "多模态 Prompt"
+    },
+    {
+      "from": "node-engine-renderer",
+      "to": "node-output-delivery",
+      "label": "质检合格成片 (9.4)"
+    },
+    {
+      "from": "node-scene-detect",
+      "to": "node-branch-5c5926",
+      "label": "分流切片"
+    },
+    {
+      "from": "node-branch-5c5926",
+      "to": {
+        "id": "node-deliv-37b862",
+        "type": "output_delivery",
+        "title": "🎬 分支成片: 赵本山 · 探索直出",
+        "x": 1560,
+        "y": 620,
+        "width": 360,
+        "data": {
+          "title": "《赵本山·分支对照实验成片》",
+          "qc_score": 9.7,
+          "status": "已就绪 / 对照中",
+          "preview_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=600&auto=format&fit=crop"
+        }
+      },
+      "label": "MiniMax 海螺 H3 并行渲染"
+    },
+    {
+      "from": "node-scene-detect",
+      "to": "node-branch-989d81",
+      "label": "分流切片"
+    },
+    {
+      "from": "node-branch-989d81",
+      "to": {
+        "id": "node-deliv-61bfe6",
+        "type": "output_delivery",
+        "title": "🎬 分支成片: 赵本山 · 探索直出",
+        "x": 1560,
+        "y": 880,
+        "width": 360,
+        "data": {
+          "title": "《赵本山·分支对照实验成片》",
+          "qc_score": 9.7,
+          "status": "已就绪 / 对照中",
+          "preview_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=600&auto=format&fit=crop"
+        }
+      },
+      "label": "MiniMax 海螺 H3 并行渲染"
+    }
+  ]
+}

@@ -1,0 +1,723 @@
+[
+  {
+    "id": "task_98af33f410fa",
+    "title": "作品交付：《范德彪 二创热门舞台》 (Hypit 一键长视频版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪长视频全片连续转绘",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "engine": "Local Hypit (FastVideo v2)",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 15.0,
+    "credits_cost": 45,
+    "created_at": "2026-11-22T00:29:14.892964",
+    "status": "completed",
+    "qc_score": 9.5,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景·开原面部与光影锁定)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.5)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身·FastVideo 卡点动作迁移)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.5)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (定格·舞台伴舞与溢光保留)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.7)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "hypit_plan": {
+      "version": "hypit.character-swap-project@1",
+      "recipe": "fastvideo-flex",
+      "engine": "fastvideo",
+      "steps": 6,
+      "target_character": "范德彪",
+      "source_video": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+      "identity_prompt": "Target character: 范德彪. Characteristic comedy facial expressions, keeping original body rhythm and stage lighting.",
+      "lighting_mode": "source",
+      "shots": [
+        {
+          "shot_id": 1,
+          "title": "镜头 01",
+          "start": 0,
+          "end": 120,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 2,
+          "title": "镜头 02",
+          "start": 120,
+          "end": 240,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 3,
+          "title": "镜头 03",
+          "start": 240,
+          "end": 360,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 4,
+          "title": "镜头 04",
+          "start": 360,
+          "end": 480,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 5,
+          "title": "镜头 05",
+          "start": 480,
+          "end": 600,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 6,
+          "title": "镜头 06",
+          "start": 600,
+          "end": 720,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 7,
+          "title": "镜头 07",
+          "start": 720,
+          "end": 840,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        },
+        {
+          "shot_id": 8,
+          "title": "镜头 08",
+          "start": 840,
+          "end": 960,
+          "duration_sec": 5.0,
+          "kind": "generate",
+          "camera": "medium shot, dynamic stage movement",
+          "pose": "dance choreography matching original dancer",
+          "action": "范德彪 动作迁移反差二创：反差开原风：范德彪长视频全片连续转绘",
+          "lighting_mode": "source"
+        }
+      ],
+      "total_shots": 8,
+      "estimated_duration_sec": 40.0
+    }
+  },
+  {
+    "id": "task_c0d169b7d087",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-22T00:29:08.600121",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 0.0,
+    "is_expired": false,
+    "remaining_days": 29,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_3279b843f432",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-22T00:28:21.779392",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 0.0,
+    "is_expired": false,
+    "remaining_days": 29,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_11bb21cf54a3",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-21T23:23:02.066887",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 0.0,
+    "is_expired": false,
+    "remaining_days": 29,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_e9f644c27f44",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-21T23:15:44.880686",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 0.1,
+    "is_expired": false,
+    "remaining_days": 29,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_0c51ba8dd8aa",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "开原反差风",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-21T00:16:33.091361",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 1.0,
+    "is_expired": false,
+    "remaining_days": 28,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_ee55717128da",
+    "title": "作品交付：《赵本山 二创热门舞台》 (15s 高清完整版)",
+    "character": "赵本山",
+    "prompt": "开原大舞厅太空步",
+    "video_url": "https://www.bilibili.com/video/BV1test_hitl",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-18T01:24:06.128235",
+    "status": "completed",
+    "qc_score": 7.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (7.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 4.0,
+    "is_expired": false,
+    "remaining_days": 26,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_25cb4a9d0366",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "霸气女团舞",
+    "video_url": "https://www.bilibili.com/video/BV1test",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-18T01:23:35.223587",
+    "status": "completed",
+    "qc_score": 7.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (7.4)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 4.0,
+    "is_expired": false,
+    "remaining_days": 26,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_13619a3f8593",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-16T14:48:08.160441",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.2)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 5.4,
+    "is_expired": false,
+    "remaining_days": 24,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_70069df7ed59",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-16T14:40:26.232849",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.2)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 5.4,
+    "is_expired": false,
+    "remaining_days": 24,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_023896d10753",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-16T11:26:34.089010",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.2)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 5.5,
+    "is_expired": false,
+    "remaining_days": 24,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_104f35cd1a37",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-16T02:38:32.402724",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.2)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 5.9,
+    "is_expired": false,
+    "remaining_days": 24,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "task_9fea62b03aa7",
+    "title": "作品交付：《范德彪 二创热门舞台》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装跳卡点舞",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-16T02:26:40.430792",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部置换)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身肢体卡点)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.2)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格伴舞)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 5.9,
+    "is_expired": false,
+    "remaining_days": 24,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  },
+  {
+    "id": "proj_current_demo",
+    "title": "作品交付：《当范德彪误入 K-pop 练习生海选》 (15s 高清完整版)",
+    "character": "范德彪",
+    "prompt": "反差开原风：范德彪身穿维多利亚西装，神情霸气跳 K-Pop 卡点女团舞，保留经典鹰爪挠手势",
+    "video_url": "https://www.bilibili.com/video/BV1xx411c7X_KpopDance",
+    "cover_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop",
+    "result_url": "https://assets.mememorph.ai/demo_result_1080p.mp4",
+    "shots_count": 3,
+    "duration_sec": 14.8,
+    "credits_cost": 45,
+    "created_at": "2026-11-14T02:26:40.430792",
+    "status": "completed",
+    "qc_score": 9.4,
+    "shots": [
+      {
+        "shot_id": 1,
+        "title": "镜头 01 (近景面部)",
+        "time_range": "00:00 - 00:04",
+        "status": "质检通过 (9.4)",
+        "image_url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 2,
+        "title": "镜头 02 (全身连贯舞)",
+        "time_range": "00:04 - 00:09",
+        "status": "质检通过 (9.2)",
+        "image_url": "https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=400&auto=format&fit=crop"
+      },
+      {
+        "shot_id": 3,
+        "title": "镜头 03 (舞台定格)",
+        "time_range": "00:09 - 00:15",
+        "status": "质检通过 (9.6)",
+        "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=400&auto=format&fit=crop"
+      }
+    ],
+    "validity_days_total": 30,
+    "age_days": 7.9,
+    "is_expired": false,
+    "remaining_days": 22,
+    "can_replace": true,
+    "sunset_reason": "处于1个月保护期内，支持一键替换与再二创"
+  }
+]
