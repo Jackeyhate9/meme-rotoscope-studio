@@ -6,6 +6,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI%200.110-009688.svg)](https://fastapi.tiangolo.com/)
 [![AG-UI Protocol](https://img.shields.io/badge/Protocol-AG--UI%20SSE-6366f1.svg)](https://github.com/ag-ui-protocol/ag-ui)
+[![MCP Server](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-8b5cf6.svg)](https://modelcontextprotocol.io)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/)
 
 **MemeMorph 是一款可以即时搜索 B 站等新媒体平台的智能创意工具，允许客户使用 Hypit 技能进行编辑的同时也支持一键长视频修改。**  
@@ -210,6 +211,59 @@ python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8008 --
 * **前台体验入口**：直接双击或静态托管打开 `prototype.html`
 * **运营中台入口**：打开 `admin.html` (内置默认门禁: `Admin` / `123456`)
 * **交互式 Swagger API 文档**：`http://127.0.0.1:8008/docs`
+
+---
+
+## 🔌 MCP 跨 Agent 协议接入 (Model Context Protocol for Claude / Codex / Cursor)
+
+MemeMorph 原生支持 **Anthropic MCP (Model Context Protocol)** 标准协议。任何支持 MCP 的宿主 Agent（如 **Claude Desktop**、**Claude Code**、**OpenAI Codex**、**Cursor**、**Antigravity**）均可将 MemeMorph 作为专属二创技能工具箱直接挂载，让大模型通过自然语言调度视频搜索、镜头切分、转绘执行与 Auto-QC 质检！
+
+### 1. 快速配置 (Claude Desktop / Cursor / Codex)
+
+打开客户端的 MCP 配置文件（如 Claude Desktop 的 `claude_desktop_config.json` 或 Cursor 的 `.cursor/mcp.json`），添加如下服务声明（或直接参考根目录下的 [mcp_config.json](mcp_config.json)）：
+
+```json
+{
+  "mcpServers": {
+    "mememorph": {
+      "command": "python",
+      "args": ["d:/meme-rotoscope-studio/run_mcp.py"],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "HYPIT_HOME": "D:/AI/gongzuoliu/clone video"
+      }
+    }
+  }
+}
+```
+
+*若为 Linux / macOS 环境，将路径调整为本地工作区对应路径即可。*
+
+### 2. 独立启动与测试
+通过根目录的专属入口以标准输入输出（`stdio`）模式运行：
+```powershell
+# Windows 双击运行或命令行启动:
+.\start_mcp.bat
+
+# 或通过 Python 直接运行:
+python run_mcp.py
+```
+
+### 3. MCP 工具能力矩阵 (Tools Matrix)
+
+| 工具名称 (Tool Name) | 核心职责 | 参数说明 |
+| :--- | :--- | :--- |
+| `search_hot_videos` | 即时搜索 B站与抖音热门舞蹈 MV，智能提取二创人设建议 | `keyword`（搜索词）, `category`（分类）, `limit`（条数） |
+| `split_video_scenes` | PySceneDetect 镜头切分与长视频滑动时序分块 | `video_path_or_url`, `threshold`, `long_video_mode`（长视频开关） |
+| `create_rotoscope_task` | 创建并下发 AI 视频转绘与角色姿态迁移任务 | `video_url`, `target_character`, `prompt`, `engine`, `long_video_mode`, `lighting_mode` |
+| `inspect_video_qc` | Auto-QC 视觉多模态关键帧质检与人机协同裁决打分 | `reference_character`, `interactive_mode` |
+| `check_engine_matrix` | 实时探测 Seedance 2.5、可灵 1.5、MiniMax 与本地 Hypit 状态 | 无需参数，返回 4 维大模型底座可用性与显存时延 |
+| `get_preset_characters` | 获取爆款反差角色基因库（范德彪、赵本山、赛博大花袄等）与提示词模板 | 无需参数，返回预置角色及二创公式 |
+| `list_projects` | 查询全部转绘交付作品、下载地址与 30 天到期倒计时 | 无需参数，返回作品列表与生命周期状态 |
+| `clean_expired_projects` | 一键彻底淘汰并释放超期（>30天）的历史老项目存储 | 无需参数，自动完成过期老项目清理 |
+
+### 4. MCP Prompts 扩展
+* `recommend_meme_rotoscope(video_topic)`：向宿主 LLM 注入专业短视频传播学公式与爆款指数算法，引导 Claude / Codex 输出最佳反差角色组合、分镜策略、光影提示词与推理底座推荐。
 
 ---
 

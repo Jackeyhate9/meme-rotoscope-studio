@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
@@ -199,8 +200,38 @@ def test_api_suite():
     long_gen = r.json()
     print(f"✓ Long Video Generation Task OK: {long_gen['task_id']}, engine: {long_gen['engine']}")
 
+    print("\n=== [15/15] Testing MemeMorph MCP Server Tools & Registration ===")
+    from app.mcp_server import mcp, search_hot_videos, split_video_scenes, create_rotoscope_task, inspect_video_qc, check_engine_matrix, get_preset_characters, list_projects
+    tools = [t.name for t in mcp._tool_manager.list_tools()]
+    assert len(tools) >= 7, f"Expected at least 7 MCP tools, got {len(tools)}"
+    print(f"✓ MCP Server Registered {len(tools)} tools: {tools}")
+
+    # Test tool 1: search_hot_videos
+    search_json = json.loads(search_hot_videos("女团", limit=2))
+    assert search_json["status"] == "success"
+    assert search_json["count"] > 0
+    print(f"✓ MCP search_hot_videos OK: {search_json['count']} videos")
+
+    # Test tool 2: split_video_scenes
+    split_json = json.loads(split_video_scenes("test.mp4", long_video_mode=True))
+    assert split_json["status"] == "success"
+    assert split_json["shots_count"] >= 8
+    print(f"✓ MCP split_video_scenes OK: {split_json['shots_count']} shots in long video mode")
+
+    # Test tool 3: check_engine_matrix
+    eng_json = json.loads(check_engine_matrix())
+    assert eng_json["status"] == "success"
+    assert len(eng_json["engines_matrix"]) == 4
+    print(f"✓ MCP check_engine_matrix OK: {len(eng_json['engines_matrix'])} engines verified")
+
+    # Test tool 4: inspect_video_qc
+    qc_json = json.loads(inspect_video_qc("范德彪"))
+    assert qc_json["status"] == "success"
+    assert qc_json["qc_report"]["overall_score"] > 0
+    print(f"✓ MCP inspect_video_qc OK: score {qc_json['qc_report']['overall_score']}")
+
     print("\n==================================================")
-    print("🎉 ALL 14 API TEST SUITES PASSED FLAWLESSLY! 🎉")
+    print("🎉 ALL 15 API & MCP TEST SUITES PASSED FLAWLESSLY! 🎉")
     print("==================================================")
 
 if __name__ == "__main__":

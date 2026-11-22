@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "mememorph": {
+      "command": "python",
+      "args": ["d:/meme-rotoscope-studio/run_mcp.py"],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "HYPIT_HOME": "D:/AI/gongzuoliu/clone video"
+      }
+    }
+  }
+}
