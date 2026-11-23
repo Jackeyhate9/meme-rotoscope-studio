@@ -39,7 +39,6 @@ from app.services.qc_agent import VideoQCAgent
 from app.services.storage_manager import StorageManager
 from app.services.hypit_engine import HypitEngineService
 from app.services.cloud_engines import EngineGateway
-from app.services.postiz_service import PostizService
 
 # 初始化 MCP Server
 mcp = MCPServer("MemeMorph")
@@ -266,68 +265,6 @@ def clean_expired_projects() -> str:
         }, ensure_ascii=False)
     except Exception as e:
         logger.error("clean_expired_projects error: %s", e)
-        return json.dumps({"status": "error", "message": str(e)}, ensure_ascii=False)
-
-
-# ==========================================
-# 📢 Postiz 社交媒体全网自动发布 MCP Tools
-# ==========================================
-
-@mcp.tool()
-def postiz_check_status() -> str:
-    """
-    检查 Postiz 自动化社交媒体发布中枢的运行状态、连接地址与鉴权配置。
-    """
-    try:
-        health = PostizService.check_health()
-        return json.dumps({"status": "success", "postiz": health}, ensure_ascii=False, indent=2)
-    except Exception as e:
-        logger.error("postiz_check_status error: %s", e)
-        return json.dumps({"status": "error", "message": str(e)}, ensure_ascii=False)
-
-
-@mcp.tool()
-def postiz_list_channels() -> str:
-    """
-    获取 Postiz 中已连接绑定的社交媒体平台列表（Twitter/X, Reddit, LinkedIn, TikTok, YouTube 等）。
-    """
-    try:
-        channels = PostizService.list_integrations()
-        return json.dumps({"status": "success", "count": len(channels), "channels": channels}, ensure_ascii=False, indent=2)
-    except Exception as e:
-        logger.error("postiz_list_channels error: %s", e)
-        return json.dumps({"status": "error", "message": str(e)}, ensure_ascii=False)
-
-
-@mcp.tool()
-def postiz_publish_post(
-    content: str,
-    channels: Optional[List[str]] = None,
-    title: Optional[str] = None,
-    schedule_time: Optional[str] = None,
-    media_paths: Optional[List[str]] = None
-) -> str:
-    """
-    通过 Postiz 自动化发布或排期内容至 Twitter/X、Reddit、LinkedIn 等社交媒体平台。
-    
-    Args:
-        content: 宣发或帖子正文（支持 Markdown）
-        channels: 目标发布渠道列表（如 ["twitter", "reddit"]，留空默认发布至已连接的主力渠道）
-        title: 标题（用于 Reddit 等需要独立标题的平台）
-        schedule_time: 定时发布时间 (ISO 格式如 '2026-11-23T22:00:00Z'，留空为立即发布)
-        media_paths: 随帖附带的本地或网络配图/视频文件路径列表
-    """
-    try:
-        res = PostizService.publish_post(
-            content=content,
-            channels=channels,
-            title=title,
-            schedule_time=schedule_time,
-            media_paths=media_paths
-        )
-        return json.dumps(res, ensure_ascii=False, indent=2)
-    except Exception as e:
-        logger.error("postiz_publish_post error: %s", e)
         return json.dumps({"status": "error", "message": str(e)}, ensure_ascii=False)
 
 

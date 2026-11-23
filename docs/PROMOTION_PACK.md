@@ -1,6 +1,6 @@
 # MemeMorph 全渠道宣发物料与文案包 (Launch Promotion Kit)
 
-本包已为您精细化调优各平台（Reddit、Twitter/X、Hacker News、V2EX、知乎、B站）的宣发文案、标题与配图指引，可直接导入 **Postiz** 进行全网批量排期，或手动一键粘贴发布。
+本包已为您精细化调优各平台（Reddit、Twitter/X、Hacker News、V2EX、知乎、B站）的宣发文案、标题与配图指引，可直接复制粘贴发布或使用官方免费工具进行全网分发。
 
 ---
 
