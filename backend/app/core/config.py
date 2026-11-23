@@ -42,6 +42,10 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_BASE_URL: Optional[str] = "https://api.openai.com/v1"
 
+    # 5. Postiz 自动化社交媒体发布中枢配置 (本地为 http://localhost:5000，云端为 https://app.postiz.com)
+    POSTIZ_BASE_URL: str = os.getenv("POSTIZ_BASE_URL", "http://localhost:5000")
+    POSTIZ_API_KEY: Optional[str] = os.getenv("POSTIZ_API_KEY", None)
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

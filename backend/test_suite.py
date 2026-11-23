@@ -230,8 +230,28 @@ def test_api_suite():
     assert qc_json["qc_report"]["overall_score"] > 0
     print(f"✓ MCP inspect_video_qc OK: score {qc_json['qc_report']['overall_score']}")
 
+    print("\n=== [16/16] Testing Postiz Social Publisher Service & MCP Tools ===")
+    from app.services.postiz_service import PostizService
+    from app.mcp_server import postiz_check_status, postiz_list_channels, postiz_publish_post
+    p_status = json.loads(postiz_check_status())
+    assert p_status["status"] == "success"
+    print(f"✓ Postiz Service Health: {p_status['postiz']['service']} (Mode: {p_status['postiz']['mode']})")
+
+    p_channels = json.loads(postiz_list_channels())
+    assert p_channels["status"] == "success"
+    assert p_channels["count"] > 0
+    print(f"✓ Postiz Channels Supported: {p_channels['count']} platforms")
+
+    p_post = json.loads(postiz_publish_post(
+        content="Test Postiz auto publish from test suite",
+        channels=["twitter", "reddit"],
+        title="CI Test"
+    ))
+    assert p_post["status"] in ["success", "staged"]
+    print(f"✓ Postiz Publish Dispatch/Staged OK: Task {p_post['task_id']}")
+
     print("\n==================================================")
-    print("🎉 ALL 15 API & MCP TEST SUITES PASSED FLAWLESSLY! 🎉")
+    print("🎉 ALL 16 API, MCP & POSTIZ TEST SUITES PASSED! 🎉")
     print("==================================================")
 
 if __name__ == "__main__":

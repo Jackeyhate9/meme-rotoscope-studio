@@ -261,6 +261,9 @@ python run_mcp.py
 | `get_preset_characters` | 获取爆款反差角色基因库（范德彪、赵本山、赛博大花袄等）与提示词模板 | 无需参数，返回预置角色及二创公式 |
 | `list_projects` | 查询全部转绘交付作品、下载地址与 30 天到期倒计时 | 无需参数，返回作品列表与生命周期状态 |
 | `clean_expired_projects` | 一键彻底淘汰并释放超期（>30天）的历史老项目存储 | 无需参数，自动完成过期老项目清理 |
+| `postiz_check_status` | 检查 Postiz 自动化社交媒体发布中枢的健康状态与端口 | 无需参数，返回服务连通性与鉴权模式 |
+| `postiz_list_channels` | 查询 Postiz 中绑定的多平台社媒列表 (Twitter, Reddit 等) | 无需参数，返回已连接与可接入渠道 |
+| `postiz_publish_post` | 通过 Postiz 一键将二创宣发排期或推送至全网主流社交平台 | `content`（正文）, `channels`（目标平台）, `title`, `schedule_time` |
 
 ### 4. MCP Prompts 扩展
 * `recommend_meme_rotoscope(video_topic)`：向宿主 LLM 注入专业短视频传播学公式与爆款指数算法，引导 Claude / Codex 输出最佳反差角色组合、分镜策略、光影提示词与推理底座推荐。
